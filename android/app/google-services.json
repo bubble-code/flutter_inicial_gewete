@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175864252916",
+    "project_id": "fluttergewete",
+    "storage_bucket": "fluttergewete.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175864252916:android:147f43d698a6fa642111a1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_inicial_gewete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175864252916-bk8dk6rh7ra5dfr05daftm2pir413sqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH4v-gjcD_KIlnOsDlnxPd-Y-uR0Jq91Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175864252916-bk8dk6rh7ra5dfr05daftm2pir413sqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
