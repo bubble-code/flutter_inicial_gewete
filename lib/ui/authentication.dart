@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inicial_gewete/net/flutterfire.dart';
+import 'package:flutter_inicial_gewete/ui/home_page.dart';
+
 
 class Authentication extends StatefulWidget {
-  const Authentication({Key? key}) : super(key: key);
+  const Authentication({Key? key, Title? title}) : super(key: key);
 
   @override
   State<Authentication> createState() => _AuthenticationState();
@@ -10,6 +13,9 @@ class Authentication extends StatefulWidget {
 class _AuthenticationState extends State<Authentication> {
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passField = TextEditingController();
+  final urlImage = 'assets.images/layout_set_logo-removebg-preview.png';
+
+  bool shouldNavigate = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,32 +26,52 @@ class _AuthenticationState extends State<Authentication> {
             color: Colors.blueAccent,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
-                controller: _emailField,
-                decoration: const InputDecoration(
-                    hintText: "user@merkur-casino.com",
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                    )),
+              Container(
+                child: Image.asset(urlImage),
               ),
-              TextFormField(
-                controller: _passField,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    hintText: "password",
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    labelText: "password",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                    )),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 30,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.3,
+                child: TextFormField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: _emailField,
+                  decoration: const InputDecoration(
+                      hintText: "user@merkur-casino.com",
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      labelText: "Email",
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      )),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.3,
+                child: TextFormField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: _passField,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      hintText: "password",
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      labelText: "password",
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      )),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
               ),
               Container(
                 width: MediaQuery.of(context).size.width / 1.4,
@@ -55,9 +81,20 @@ class _AuthenticationState extends State<Authentication> {
                   color: Colors.white,
                 ),
                 child: MaterialButton(
-                  onPressed: () => {},
+                  onPressed: () async => {
+                    shouldNavigate =
+                        await singIn(_emailField.text, _passField.text),
+                    if (shouldNavigate)
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage())),
+                  },
                   child: const Text('Login'),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
               ),
               Container(
                 width: MediaQuery.of(context).size.width / 1.4,
@@ -67,9 +104,15 @@ class _AuthenticationState extends State<Authentication> {
                   color: Colors.white,
                 ),
                 child: MaterialButton(
-                  onPressed: () => {},
-                  child: const Text('Login'),
+                  onPressed: () async => {
+                    shouldNavigate =
+                        await register(_emailField.text, _passField.text)
+                  },
+                  child: const Text('Register'),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
               ),
             ],
           )),
