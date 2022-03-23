@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inicial_gewete/net/flutterfire.dart';
 import 'package:flutter_inicial_gewete/ui/home_page.dart';
 
-
 class Authentication extends StatefulWidget {
   const Authentication({Key? key, Title? title}) : super(key: key);
 
@@ -23,14 +22,14 @@ class _AuthenticationState extends State<Authentication> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
-            color: Colors.blueAccent,
+            color: Color.fromARGB(255, 84, 144, 248),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image.asset(urlImage),
-              ),
+              // Container(
+              //   child: Image.asset(urlImage),
+              // ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 30,
               ),
@@ -85,10 +84,7 @@ class _AuthenticationState extends State<Authentication> {
                     shouldNavigate =
                         await singIn(_emailField.text, _passField.text),
                     if (shouldNavigate)
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage())),
+                      Navigator.pushReplacementNamed(context, 'home')
                   },
                   child: const Text('Login'),
                 ),

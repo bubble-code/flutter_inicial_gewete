@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  address_search_field
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

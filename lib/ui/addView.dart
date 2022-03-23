@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inicial_gewete/net/flutterfire.dart';
 
 class AddView extends StatefulWidget {
   const AddView({Key? key}) : super(key: key);
@@ -38,24 +41,21 @@ class _AddViewState extends State<AddView> {
               }).toList(),
             ),
             Container(
-              width: MediaQuery.of(context).size.width/1.4,
+              width: MediaQuery.of(context).size.width / 1.4,
               child: TextFormField(
                 controller: _amoutController,
-                decoration: InputDecoration(
-                  labelText: "Coin Amount"
-                ),
+                decoration: InputDecoration(labelText: "Coin Amount"),
               ),
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.4,
               height: 45,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: Colors.white
-              ),
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white),
               child: MaterialButton(
-                onPressed: () async{
-
+                onPressed: () async {
+                  await addCoins(dropdownValue, "20");
                   Navigator.of(context).pop();
                 },
                 child: const Text("Add"),
