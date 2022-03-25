@@ -13,7 +13,6 @@ void main() async {
   await Firebase.initializeApp();
   _initialPosition = await getPosition();
   runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
     home: InitialPage(),
   ));
 }
@@ -24,6 +23,12 @@ class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        // debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         title: 'Merkur Tecnicos',
         // home: Authentication(),
         initialRoute: 'login',

@@ -22,7 +22,7 @@ class _AuthenticationState extends State<Authentication> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 84, 144, 248),
+            color: Colors.blue,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
