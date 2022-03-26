@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Stylee {
@@ -20,5 +19,9 @@ class Stylee {
     color: Colors.white,
     fontSize: 25,
     fontWeight: FontWeight.bold,
+  );
+  static const deshStyleTitle = TextStyle(
+    color: Colors.white,
+    // fontWeight: FontWeight.bold,
   );
 }

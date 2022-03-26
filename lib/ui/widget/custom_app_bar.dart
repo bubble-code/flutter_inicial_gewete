@@ -3,7 +3,8 @@ import 'package:flutter_inicial_gewete/config/Palette.dart';
 import '../addLocationSalon.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  final String title;
+  const CustomAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,7 +18,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         iconSize: 28.0,
         onPressed: () {},
       ),
-      title: const Text("Hola Alejandro"),
+      title: Text(title),
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
