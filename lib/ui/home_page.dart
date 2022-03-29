@@ -12,7 +12,6 @@ import 'package:flutter_inicial_gewete/ui/widget/buttonDashGrid.dart';
 import 'package:flutter_inicial_gewete/ui/widget/custom_app_bar.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter_inicial_gewete/ui/widget/dashGrid.dart';
-import 'addView.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,15 +27,6 @@ class _HomePageState extends State<HomePage> {
     final fecha = formatDate(DateTime.now(), [DD, ' ', dd, '-', mm]);
     return Scaffold(
       appBar: const CustomAppBar(title: "Main Dash Board "),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   backgroundColor: Colors.blueAccent,
-      //   items: const [
-      //     Icon(Icons.add, size: 30),
-      //     Icon(Icons.list, size: 30),
-      //     Icon(Icons.compare_arrows, size: 30),
-      //   ],
-      //   onTap: (index) {},
-      // ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -177,13 +167,15 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddView(),
-              ));
-        },
+        onPressed: () {}
+        // {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const AddView(),
+        //     ));
+        // },
+        ,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -192,6 +184,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+//===================================================
   SliverToBoxAdapter _buildHeader(double screenHeiht, String fecha) {
     return SliverToBoxAdapter(
       child: Container(

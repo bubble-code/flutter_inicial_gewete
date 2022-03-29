@@ -18,7 +18,12 @@ class _GewetePageState extends State<GewetePage> {
         title: "Estados de GEWETES",
       ),
       body: Container(
-        decoration: const BoxDecoration(color: Palette.primatyColor),
+        decoration: BoxDecoration(
+          color: Palette.primatyColor,
+          image: DecorationImage(
+              image: Image.asset('assets/images/fondoMain.jpg').image,
+              fit: BoxFit.cover),
+        ),
         child: GeweteGrid(),
       ),
     );

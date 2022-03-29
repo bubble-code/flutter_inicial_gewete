@@ -41,6 +41,7 @@ dependencies:
   bubble_tab_indicator: ^0.1.6
   fl_chart: ^0.50.0
   date_format: ^2.0.5
+  sql_conn: ^0.0.3
 
 dev_dependencies:
   flutter_test:
