@@ -33,23 +33,52 @@ class _GeweteGridState extends State<GeweteGrid> {
   }
 
   Future<List<GeweteObject>> saldosGewetes() async {
-    List<GeweteObject> tem = await listSalones();
-    List<GeweteObject> tem2 = [];
-
-    tem.map((e) {
-      ConnetionDB cc = ConnetionDB(e.ip, e.pass);
-      cc.connect().then((_) => cc.reader("query")).then((value) {
-        tem2.add(
-          GeweteObject(
-            ip: "",
-            nombre: "",
-            pass: "",
-          ),
-        );
-        debugPrint(value.toString());
+    List<GeweteObject> tem2 = await listSalones();
+    List<GeweteObject> listResult = [];
+    for (var item in tem2) {
+      ConnetionDB cc = ConnetionDB(item.ip, item.pass);
+      await cc.connect();
+      await cc.reader("query").then((value) {
+        listResult.add(GeweteObject(
+            ip: value[0]['type'].toString(),
+            nombre: value[0]['value'].toString(),
+            pass: "pass"));
       });
-    });
-    return tem2;
+    }
+
+    // .then((value) {
+    //   value.forEach(
+    //     (e) async {
+    //       ConnetionDB cc = ConnetionDB(e.ip, e.pass);
+    //       await cc.connect();
+    //       await cc.reader("query").then((value) {
+    //         tem2.add(
+    //             const GeweteObject(ip: "90", nombre: "nombre", pass: "pass"));
+    //       });
+    // tem2.add(
+    //   GeweteObject(
+    //     ip: "",
+    //     nombre: "",
+    //     pass: "",
+    //   ),
+    // );
+    //     },
+    //   );
+    // });
+    debugPrint(tem2.length.toString());
+
+    // ConnetionDB cc = ConnetionDB(e.ip, e.pass);
+    // cc.connect().then((_) => cc.reader("query")).then((value) {
+    //   tem2.add(
+    //     GeweteObject(
+    //       ip: "",
+    //       nombre: "",
+    //       pass: "",
+    //     ),
+    //   );
+    //   debugPrint(value.toString());
+    // });
+    return listResult;
   }
 
   @override

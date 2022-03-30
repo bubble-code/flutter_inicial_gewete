@@ -22,38 +22,38 @@ class ButtonGeweteGrid extends StatefulWidget {
 }
 
 class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback(
-      (_) {
-        ConnetionDB cc = ConnetionDB(widget.ip, widget.passw);
-        cc.connect().then((_) => cc.reader("query")).then(
-          (value) {
-            debugPrint(value.toString());
-            // debugPrint("${value[0]['type'].toString()}-- ");
-            // veint = value[1]['type'].toString();
-            // diez = value[2]['type'].toString();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance!.addPostFrameCallback(
+  //     (_) {
+  //       ConnetionDB cc = ConnetionDB(widget.ip, widget.passw);
+  //       cc.connect().then((_) => cc.reader("query")).then(
+  //         (value) {
+  //           debugPrint(value.toString());
+  //           // debugPrint("${value[0]['type'].toString()}-- ");
+  //           // veint = value[1]['type'].toString();
+  //           // diez = value[2]['type'].toString();
 
-            debugPrint(value[0]['type'].toString());
-            debugPrint(value[0]['value'].toString());
-            // debugPrint(value[0]['type'].toString());
-            // showDialog(
-            //   context: context,
-            //   builder: (context) => AlertDialog(
-            //     title: Text(
-            //       value[0]['type'].toString(),
-            //     ),
-            //     content: Row(
-            //       children: [Text(value[0]['value'].toString())],
-            //     ),
-            //   ),
-            // );
-          },
-        );
-      },
-    );
-  }
+  //           debugPrint(value[0]['type'].toString());
+  //           debugPrint(value[0]['value'].toString());
+  //           // debugPrint(value[0]['type'].toString());
+  //           // showDialog(
+  //           //   context: context,
+  //           //   builder: (context) => AlertDialog(
+  //           //     title: Text(
+  //           //       value[0]['type'].toString(),
+  //           //     ),
+  //           //     content: Row(
+  //           //       children: [Text(value[0]['value'].toString())],
+  //           //     ),
+  //           //   ),
+  //           // );
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
