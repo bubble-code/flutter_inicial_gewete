@@ -24,7 +24,7 @@ class _GewetePageState extends State<GewetePage> {
               image: Image.asset('assets/images/fondoMain.jpg').image,
               fit: BoxFit.cover),
         ),
-        child: GeweteGrid(),
+        child: const GeweteGrid(),
       ),
     );
   }

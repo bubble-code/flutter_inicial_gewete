@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inicial_gewete/net/flutterfire.dart';
 import 'package:flutter_inicial_gewete/ui/home_page.dart';
 
@@ -13,8 +16,22 @@ class _AuthenticationState extends State<Authentication> {
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passField = TextEditingController();
   final urlImage = 'assets.images/layout_set_logo-removebg-preview.png';
+  Timer? _timer;
 
   bool shouldNavigate = false;
+  @override
+  void initState() {
+    super.initState();
+    EasyLoading.addStatusCallback((status) {
+      print('EasyLoading Status $status');
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
+    EasyLoading.showSuccess('Use in initState');
+    // EasyLoading.removeCallbacks();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +56,7 @@ class _AuthenticationState extends State<Authentication> {
                   style: const TextStyle(color: Colors.white),
                   controller: _emailField,
                   decoration: const InputDecoration(
-                      hintText: "user@merkur-casino.com",
+                      // hintText: "@merkur-casino.com",
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -59,7 +76,7 @@ class _AuthenticationState extends State<Authentication> {
                   controller: _passField,
                   obscureText: true,
                   decoration: const InputDecoration(
-                      hintText: "password",
+                      // hintText: "password",
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -81,10 +98,16 @@ class _AuthenticationState extends State<Authentication> {
                 ),
                 child: MaterialButton(
                   onPressed: () async => {
+                    EasyLoading.show(status: 'loading...'),
                     shouldNavigate =
                         await singIn(_emailField.text, _passField.text),
                     if (shouldNavigate)
-                      Navigator.pushReplacementNamed(context, 'home')
+                      {
+                        Navigator.pushReplacementNamed(context, 'home'),
+                        EasyLoading.dismiss(),
+                      }
+                    else
+                      {EasyLoading.showError('Failed with Error')}
                   },
                   child: const Text('Login'),
                 ),

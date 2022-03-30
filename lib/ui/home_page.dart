@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                         ico: Icons.car_repair,
                         color: Colors.lightBlue),
                     ButtonDashGrid(
-                        title: "Notas",
+                        title: "CheckList",
                         ico: Icons.car_repair,
                         color: Colors.purple),
                   ],

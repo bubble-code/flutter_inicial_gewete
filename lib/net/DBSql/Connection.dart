@@ -9,7 +9,7 @@ class ConnetionDB {
   final String ipp, pass;
   ConnetionDB(this.ipp, this.pass);
   Future<void> connect() async {
-    debugPrint("Connecting...");
+    //debugPrint("Connecting...");
     try {
       await SqlConn.connect(
           ip: ipp,
