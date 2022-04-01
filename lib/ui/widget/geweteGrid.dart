@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inicial_gewete/model/DatosDeGewete.dart';
 import 'package:flutter_inicial_gewete/model/GeweteObj.dart';
+import 'package:flutter_inicial_gewete/net/flutterfire.dart';
 
 import '../../net/DBSql/Connection.dart';
 import 'ButtomGeweteGrid.dart';
@@ -16,23 +15,6 @@ class GeweteGrid extends StatefulWidget {
 }
 
 class _GeweteGridState extends State<GeweteGrid> {
-  // List<GeweteObject> lista = [];
-  Future<List<GeweteObject>> listSalones() async {
-    List<GeweteObject> lista = [];
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection("salones")
-        .get()
-        .then((value) => value.docs.forEach((element) {
-              lista.add(GeweteObject(
-                  ip: element.get("ip"),
-                  nombre: element.id,
-                  pass: element.get("pass")));
-            }));
-    return lista;
-  }
-
   Future<List<DatosDeGewete>> saldosGewetes() async {
     List<GeweteObject> tem2 = await listSalones();
     List<DatosDeGewete> listResult = [];

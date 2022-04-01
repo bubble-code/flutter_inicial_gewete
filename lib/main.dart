@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inicial_gewete/ui/AveriasPage.dart';
 import 'package:flutter_inicial_gewete/ui/addLocationSalon.dart';
 import 'package:flutter_inicial_gewete/ui/authentication.dart';
 import 'package:flutter_inicial_gewete/ui/gewetepage.dart';
@@ -56,6 +57,7 @@ class InitialPage extends StatelessWidget {
         "login": (context) => const Authentication(),
         "home": (context) => const HomePage(),
         "gewete": (context) => const GewetePage(),
+        "averias": (context) => const AveriasPage(),
         // "confSalon": (context) => const AddLocationSalon(),
       },
       builder: EasyLoading.init(),

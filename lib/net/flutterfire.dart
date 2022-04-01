@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
+import '../model/GeweteObj.dart';
+
 Future<bool> singIn(String email, String pass) async {
   try {
     await FirebaseAuth.instance
@@ -58,4 +60,20 @@ Future<bool> addCoins(String id, String amount) async {
   } catch (e) {
     return false;
   }
+}
+
+Future<List<GeweteObject>> listSalones() async {
+  List<GeweteObject> lista = [];
+  await FirebaseFirestore.instance
+      .collection("users")
+      .doc(FirebaseAuth.instance.currentUser?.email)
+      .collection("salones")
+      .get()
+      .then((value) => value.docs.forEach((element) {
+            lista.add(GeweteObject(
+                ip: element.get("ip"),
+                nombre: element.id,
+                pass: element.get("pass")));
+          }));
+  return lista;
 }
