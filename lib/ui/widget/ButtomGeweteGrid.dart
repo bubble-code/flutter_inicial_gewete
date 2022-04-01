@@ -6,15 +6,15 @@ import 'package:flutter_inicial_gewete/net/DBSql/Connection.dart';
 import '../../config/Style.dart';
 
 class ButtonGeweteGrid extends StatefulWidget {
-  final String title, ip, passw;
+  final String title;
+  final Map<double, dynamic> valores;
   final Color color;
 
   const ButtonGeweteGrid({
     Key? key,
     required this.title,
     required this.color,
-    required this.ip,
-    required this.passw,
+    required this.valores,
   }) : super(key: key);
 
   @override
@@ -57,6 +57,31 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> result = [];
+    widget.valores.forEach((key, value) {
+      result.add(
+        Container(
+          padding: const EdgeInsets.only(
+              top: 16.0, bottom: 16.0, right: 3.0, left: 3.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.0),
+            color: Colors.white54,
+          ),
+          child: Column(
+            children: [
+              Text(
+                key.toStringAsFixed(2),
+                style: const TextStyle(fontSize: 16.0, color: Colors.black),
+              ),
+              Text(
+                value.toStringAsFixed(2),
+                style: const TextStyle(fontSize: 10.0),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
     return InkWell(
       onTap: () {
         // List<dynamic> resulty = [];
@@ -74,9 +99,15 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.title, style: Stylee.deshStyleTitle),
-            Text(widget.ip, style: Stylee.deshStyleTitle),
-            Text(widget.passw, style: Stylee.deshStyleTitle)
+            Text(
+              widget.title,
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [...result],
+            ),
           ],
         ),
       ),

@@ -1,5 +1,5 @@
 class DatosDeGewete {
   final String salon;
-  final Map<String, dynamic> valores;
-  DatosDeGewete(this.salon, this.valores);
+  final Map<double, dynamic> valores;
+  DatosDeGewete({required this.salon, required this.valores});
 }

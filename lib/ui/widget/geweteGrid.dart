@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inicial_gewete/model/DatosDeGewete.dart';
 import 'package:flutter_inicial_gewete/model/GeweteObj.dart';
 
 import '../../net/DBSql/Connection.dart';
@@ -32,52 +33,20 @@ class _GeweteGridState extends State<GeweteGrid> {
     return lista;
   }
 
-  Future<List<GeweteObject>> saldosGewetes() async {
+  Future<List<DatosDeGewete>> saldosGewetes() async {
     List<GeweteObject> tem2 = await listSalones();
-    List<GeweteObject> listResult = [];
+    List<DatosDeGewete> listResult = [];
     for (var item in tem2) {
       ConnetionDB cc = ConnetionDB(item.ip, item.pass);
+      Map<double, dynamic> datosGewete = <double, dynamic>{};
       await cc.connect();
       await cc.reader("query").then((value) {
-        listResult.add(GeweteObject(
-            ip: value[0]['type'].toString(),
-            nombre: value[0]['value'].toString(),
-            pass: "pass"));
+        for (var ele in value) {
+          datosGewete[ele['type']] = ele['value'];
+        }
+        listResult.add(DatosDeGewete(salon: item.nombre, valores: datosGewete));
       });
     }
-
-    // .then((value) {
-    //   value.forEach(
-    //     (e) async {
-    //       ConnetionDB cc = ConnetionDB(e.ip, e.pass);
-    //       await cc.connect();
-    //       await cc.reader("query").then((value) {
-    //         tem2.add(
-    //             const GeweteObject(ip: "90", nombre: "nombre", pass: "pass"));
-    //       });
-    // tem2.add(
-    //   GeweteObject(
-    //     ip: "",
-    //     nombre: "",
-    //     pass: "",
-    //   ),
-    // );
-    //     },
-    //   );
-    // });
-    debugPrint(tem2.length.toString());
-
-    // ConnetionDB cc = ConnetionDB(e.ip, e.pass);
-    // cc.connect().then((_) => cc.reader("query")).then((value) {
-    //   tem2.add(
-    //     GeweteObject(
-    //       ip: "",
-    //       nombre: "",
-    //       pass: "",
-    //     ),
-    //   );
-    //   debugPrint(value.toString());
-    // });
     return listResult;
   }
 
@@ -91,44 +60,20 @@ class _GeweteGridState extends State<GeweteGrid> {
             child: SizedBox(
               height: 150,
             ),
-            // child:
-            //  Column(
-            //   children: [
-            //     const SizedBox(
-            //       height: 150,
-            //     ),
-            // Container(
-            //   padding: const EdgeInsets.all(5),
-            //   decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(6),
-            //       color: Colors.black.withOpacity(0.2),
-            //       boxShadow: [
-            //         BoxShadow(
-            //           color: Colors.black.withOpacity(0.1),
-            //           offset: const Offset(0.2, 15),
-            //           blurRadius: 10,
-            //         ),
-            //       ]),
-            //   height: MediaQuery.of(context).size.height,
-            // child:
-
-            // ],
-            // ),
           ),
         ),
         FutureBuilder(
           future: saldosGewetes(),
           builder:
-              (BuildContext context, AsyncSnapshot<List<GeweteObject>> el) {
+              (BuildContext context, AsyncSnapshot<List<DatosDeGewete>> el) {
             List<Widget> children = [];
             if (el.hasData) {
               for (var e in el.data!) {
                 children.add(
                   ButtonGeweteGrid(
-                    title: e.nombre,
-                    color: Colors.lightGreen,
-                    ip: e.ip,
-                    passw: e.pass,
+                    title: e.salon,
+                    color: Colors.black54,
+                    valores: e.valores,
                   ),
                 );
               }
@@ -146,12 +91,6 @@ class _GeweteGridState extends State<GeweteGrid> {
                 childCount: children.length,
               ),
             );
-            // return GridView.extent(
-            //   maxCrossAxisExtent: 150,
-            //   padding: const EdgeInsets.all(4),
-            //   mainAxisSpacing: 4,
-            //   crossAxisSpacing: 4,
-            //   children: [...children],
           },
         ),
       ],
