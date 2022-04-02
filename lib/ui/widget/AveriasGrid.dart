@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inicial_gewete/net/flutterfire.dart';
-
+import 'package:flutter_inicial_gewete/ui/widget/ButtomAveriasSalon.dart';
 import '../../model/GeweteObj.dart';
-import 'ButtomGeweteGrid.dart';
 
 class AveriasGrid extends StatefulWidget {
   const AveriasGrid({Key? key}) : super(key: key);
@@ -33,10 +32,8 @@ class _AveriasGridState extends State<AveriasGrid> {
             if (lis.hasData) {
               for (var item in lis.data!) {
                 children.add(
-                  ButtonGeweteGrid(
-                    title: item.nombre,
-                    color: Colors.black54,
-                    valores: const {},
+                  ButtomAveriasSalon(
+                    nombreSalon: item.nombre,
                   ),
                 );
               }

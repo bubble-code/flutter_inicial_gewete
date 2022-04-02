@@ -43,6 +43,8 @@ dependencies:
   date_format: ^2.0.5
   sql_conn: ^0.0.3
   flutter_easyloading: ^3.0.3
+  http: ^0.13.4
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:

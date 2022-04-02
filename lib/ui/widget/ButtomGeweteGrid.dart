@@ -1,9 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_inicial_gewete/model/Stock.dart';
-import 'package:flutter_inicial_gewete/net/DBSql/Connection.dart';
-import '../../config/Style.dart';
 
 class ButtonGeweteGrid extends StatefulWidget {
   final String title;
