@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_inicial_gewete/model/Averias/AveriasModel.dart';
 
 import '../model/GeweteObj.dart';
 
@@ -76,4 +79,18 @@ Future<List<GeweteObject>> listSalones() async {
                 pass: element.get("pass")));
           }));
   return lista;
+}
+
+Future<List<String>> listAverias(String name) async {
+  List<String> averias = [];
+  await FirebaseFirestore.instance
+      .collection("salones")
+      .doc("Madrid")
+      .collection("Salones")
+      .doc(name)
+      .collection("Averias")
+      .get()
+      .then((value) => debugPrint(value.docs.length.toString()));
+
+  return averias;
 }

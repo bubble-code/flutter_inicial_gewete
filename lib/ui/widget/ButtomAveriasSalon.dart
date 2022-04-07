@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inicial_gewete/net/TicketNet/TicketLogin.dart';
+import 'package:flutter_inicial_gewete/net/flutterfire.dart';
 
 import '../../net/TicketNet/TicketScraper.dart';
 
@@ -24,8 +25,9 @@ class _ButtomAveriasSalonState extends State<ButtomAveriasSalon> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (() async {
-        var tem = await TicketLogin().isLogin();
-        debugPrint(tem.toString());
+        // var tem = await TicketLogin().isLogin();
+        // debugPrint(tem.toString());
+        await listAverias(widget.nombreSalon);
       }),
       // onTap: () async {
       //   await TickecScrapper(pass: "", url: "", username: "").inicial();
