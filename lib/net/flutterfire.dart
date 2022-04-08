@@ -68,9 +68,9 @@ Future<bool> addCoins(String id, String amount) async {
 Future<List<GeweteObject>> listSalones() async {
   List<GeweteObject> lista = [];
   await FirebaseFirestore.instance
-      .collection("users")
-      .doc(FirebaseAuth.instance.currentUser?.email)
       .collection("salones")
+      .doc("Madrid")
+      .collection("Salones")
       .get()
       .then((value) => value.docs.forEach((element) {
             lista.add(GeweteObject(
@@ -81,16 +81,16 @@ Future<List<GeweteObject>> listSalones() async {
   return lista;
 }
 
-Future<List<String>> listAverias(String name) async {
-  List<String> averias = [];
-  await FirebaseFirestore.instance
+Future<int> listAverias(String name) async {
+  int averias = 0;
+  averias = await FirebaseFirestore.instance
       .collection("salones")
       .doc("Madrid")
       .collection("Salones")
       .doc(name)
       .collection("Averias")
       .get()
-      .then((value) => debugPrint(value.docs.length.toString()));
+      .then((value) => value.docs.length);
 
   return averias;
 }

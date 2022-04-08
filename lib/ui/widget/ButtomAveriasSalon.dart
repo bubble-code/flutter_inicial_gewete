@@ -46,11 +46,47 @@ class _ButtomAveriasSalonState extends State<ButtomAveriasSalon> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.nombreSalon,
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
+            FittedBox(
+              child: Text(
+                widget.nombreSalon,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
+            FutureBuilder(
+              future: listAverias(widget.nombreSalon),
+              builder: (BuildContext context, AsyncSnapshot<int> cant) {
+                return cant.data == 0
+                    ? SafeArea(child: Container())
+                    : SafeArea(
+                        child: Positioned(
+                          right: 11,
+                          top: 11,
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(6)),
+                            constraints: const BoxConstraints(
+                              minHeight: 14,
+                              minWidth: 14,
+                            ),
+                            child: Center(
+                              child: Text(
+                                cant.data.toString(),
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+              },
+            )
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: [...result],

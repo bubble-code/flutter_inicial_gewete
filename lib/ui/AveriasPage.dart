@@ -19,7 +19,7 @@ class _AveriasPageState extends State<AveriasPage> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          color: Palette.primatyColor,
+          color: Color.fromARGB(223, 181, 178, 213),
         ),
         child: const AveriasGrid(),
       ),

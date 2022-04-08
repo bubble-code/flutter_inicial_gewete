@@ -43,7 +43,9 @@ class _AveriasGridState extends State<AveriasGrid> {
             } else {
               EasyLoading.show(status: "Loading...");
             }
-            return SliverList(
+            return SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
               delegate: SliverChildBuilderDelegate(
                 ((context, index) => children[index]),
                 childCount: children.length,
