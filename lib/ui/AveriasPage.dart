@@ -15,12 +15,12 @@ class _AveriasPageState extends State<AveriasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Averias Page"),
+        title: const Text("Averias Madrid"),
       ),
       body: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(223, 181, 178, 213),
-        ),
+            // color: Color.fromARGB(223, 181, 178, 213),
+            ),
         child: const AveriasGrid(),
       ),
     );
