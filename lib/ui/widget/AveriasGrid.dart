@@ -25,9 +25,8 @@ class _AveriasGridState extends State<AveriasGrid> {
           ),
         ),
         FutureBuilder(
-          future: listSalones(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<GeweteObject>> lis) {
+          future: listSalones("Madrid"),
+          builder: (BuildContext context, AsyncSnapshot<List<Salon>> lis) {
             List<Widget> children = [];
             if (lis.hasData) {
               for (var item in lis.data!) {

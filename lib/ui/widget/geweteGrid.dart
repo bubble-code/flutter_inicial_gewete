@@ -16,7 +16,7 @@ class GeweteGrid extends StatefulWidget {
 
 class _GeweteGridState extends State<GeweteGrid> {
   Future<List<DatosDeGewete>> saldosGewetes() async {
-    List<GeweteObject> tem2 = await listSalones();
+    List<Salon> tem2 = await listSalones("Madrid");
     List<DatosDeGewete> listResult = [];
     for (var item in tem2) {
       ConnetionDB cc = ConnetionDB(item.ip, item.pass);
