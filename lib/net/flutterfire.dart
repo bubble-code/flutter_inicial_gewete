@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_inicial_gewete/model/Averias/AveriasModel.dart';
 
 import '../model/GeweteObj.dart';
+import '../model/SalonesModel.dart';
 
 Future<bool> singIn(String email, String pass) async {
   try {
@@ -72,12 +73,19 @@ Future<List<Salon>> listSalones(String comunidad) async {
       .doc(comunidad)
       .collection("Salones")
       .get()
-      .then((value) => value.docs.forEach((element) {
-            lista.add(Salon(
+      .then(
+        (value) => value.docs.forEach(
+          (element) {
+            lista.add(
+              Salon(
                 ip: element.get("ip"),
                 nombre: element.id,
-                pass: element.get("pass")));
-          }));
+                pass: element.get("pass"),
+              ),
+            );
+          },
+        ),
+      );
   return lista;
 }
 
@@ -93,4 +101,42 @@ Future<int> listAverias(String name) async {
       .then((value) => value.docs.length);
 
   return averias;
+}
+
+Future<int> totalAverias(List<NameSalon> lista) async {
+  int total = 0;
+  await Future.wait([
+    (() async => {
+          for (var item in lista)
+            {total = total + await listAverias(item.salon)}
+        })()
+  ]);
+  return total;
+}
+
+Future<List<AveriasObject>> averiasDelSalon(
+    String salon, String comunidad) async {
+  List<AveriasObject> result = [];
+  await FirebaseFirestore.instance
+      .collection("salones")
+      .doc(comunidad)
+      .collection("Salones")
+      .doc(salon)
+      .collection("Averias")
+      .get()
+      .then(
+        (value) => value.docs.forEach(
+          (element) {
+            result.add(
+              AveriasObject(
+                id: element.get("id"),
+                date: element.get("date"),
+                state: element.get("state"),
+                subject: element.get("subject"),
+              ),
+            );
+          },
+        ),
+      );
+  return result;
 }

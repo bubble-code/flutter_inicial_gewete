@@ -31,6 +31,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final salones = Provider.of<SalonProvider>(context, listen: false);
     salones.getSalon("Madrid");
+    salones.getTotalAverias(salones.listResult);
+    // print(salones.totalAverias);
   }
 
   final style = const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
@@ -130,73 +132,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //Card de Avisos
-              Container(
-                margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                height: 135,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 250, 233),
-                    borderRadius: BorderRadius.circular(7)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Icono de la card
-                    Container(
-                      margin: EdgeInsets.only(left: 15, top: 10),
-                      child: const Icon(Icons.calendar_today),
-                    ),
-                    //Text de la card
-                    Container(
-                      width: MediaQuery.of(context).size.width * 1 / 2,
-                      margin: EdgeInsets.only(left: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Recoger contadoras",
-                            style: GoogleFonts.rajdhani(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[200],
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            runSpacing: 20,
-                            children: [
-                              Text(
-                                "mañana recoger las contadoras a las 12:00 en Mecaban",
-                                style: GoogleFonts.rajdhani(
-                                  fontSize: 12,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Arrow de detalles de la card
-                    Container(
-                      margin: const EdgeInsets.only(top: 30, left: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.arrow_right,
-                          size: 35,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              const Card_Avisos(),
               const SizedBox(
                 height: 20,
               ),
@@ -345,4 +281,80 @@ class _HomePageState extends State<HomePage> {
 
 //===================================================
 
+}
+
+class Card_Avisos extends StatelessWidget {
+  const Card_Avisos({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      height: 135,
+      decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 250, 233),
+          borderRadius: BorderRadius.circular(7)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //Icono de la card
+          Container(
+            margin: EdgeInsets.only(left: 15, top: 10),
+            child: const Icon(Icons.calendar_today),
+          ),
+          //Text de la card
+          Container(
+            width: MediaQuery.of(context).size.width * 1 / 2,
+            margin: EdgeInsets.only(left: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Recoger contadoras",
+                  style: GoogleFonts.rajdhani(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red[200],
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 10,
+                  runSpacing: 20,
+                  children: [
+                    Text(
+                      "mañana recoger las contadoras a las 12:00 en Mecaban",
+                      style: GoogleFonts.rajdhani(
+                        fontSize: 12,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          //Arrow de detalles de la card
+          Container(
+            margin: const EdgeInsets.only(top: 30, left: 20),
+            child: InkWell(
+              onTap: () {},
+              child: const Icon(
+                Icons.arrow_right,
+                size: 35,
+                color: Colors.amber,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
