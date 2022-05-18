@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_inicial_gewete/model/AvisosModel.dart';
 import 'package:flutter_inicial_gewete/provider/salon_provider.dart';
 import 'package:flutter_inicial_gewete/ui/widget/buttonDashGrid.dart';
+import 'package:flutter_inicial_gewete/ui/widget/buttonInicioAverias.dart';
+import 'package:flutter_inicial_gewete/ui/widget/buttonInicioAvisos.dart';
+import 'package:flutter_inicial_gewete/ui/widget/buttonInicioGWT.dart';
+import 'package:flutter_inicial_gewete/ui/widget/cardInicioAvisos.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final salones = Provider.of<SalonProvider>(context, listen: false);
     salones.getSalon("Madrid");
-    salones.getTotalAverias(salones.listResult);
+    // salones.getTotalAverias(salones.listResult);
     // print(salones.totalAverias);
   }
 
@@ -54,11 +59,19 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ListView(children: [
+      body: Column(children: [
         SizedBox(height: 20, width: MediaQuery.of(context).size.width),
-        SizedBox(height: 70, child: listNameSalones(nameSalones)),
         Container(
-          height: MediaQuery.of(context).size.height * 1,
+          alignment: Alignment.topLeft,
+          child: Text("Madrid", style: GoogleFonts.rajdhani(textStyle: style)),
+          margin: const EdgeInsets.only(left: 24, bottom: 5),
+        ),
+        Container(
+            height: 70,
+            margin: EdgeInsets.only(left: 10, right: 10),
+            child: listNameSalones(nameSalones)),
+        Container(
+          // height: MediaQuery.of(context).size.height * 1,
           margin: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width * 1,
           decoration: const BoxDecoration(color: Colors.white70),
@@ -69,23 +82,25 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.topLeft,
                 child: Text("Tareas del dia",
                     style: GoogleFonts.rajdhani(textStyle: style)),
-                margin: const EdgeInsets.only(left: 24),
+                margin: const EdgeInsets.only(left: 12, bottom: 5),
               ),
+              // Botones de Inicio Averias GWT Avisos
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ButtonDashGrid(
-                    title: "Averias",
+                  ButtonInicioAverias(
+                    title: "AVERIAS",
                     heigh: 100,
                     width: 100,
                   ),
-                  ButtonDashGrid(
+                  ButtonInicioGWT(
                     title: "GWT",
                     heigh: 100,
                     width: 100,
                   ),
-                  ButtonDashGrid(
-                    title: "Avisos",
+                  ButtonInicioAvisos(
+                    title: "AVISOS",
                     heigh: 100,
                     width: 100,
                   ),
@@ -132,229 +147,18 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //Card de Avisos
-              const Card_Avisos(),
               const SizedBox(
                 height: 20,
               ),
-              //Card de Urgencias
-              Container(
-                margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                height: 135,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 250, 233),
-                    borderRadius: BorderRadius.circular(7)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Icono de la card
-                    Container(
-                      margin: const EdgeInsets.only(left: 15, top: 10),
-                      child: const Icon(Icons.calendar_today),
-                    ),
-                    //Text de la card
-                    Container(
-                      width: MediaQuery.of(context).size.width * 1 / 2,
-                      margin: const EdgeInsets.only(left: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Recoger contadoras",
-                            style: GoogleFonts.rajdhani(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[200],
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            runSpacing: 20,
-                            children: [
-                              Text(
-                                "mañana recoger las contadoras a las 12:00 en Mecaban",
-                                style: GoogleFonts.rajdhani(
-                                  fontSize: 12,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Arrow de detalles de la card
-                    Container(
-                      margin: const EdgeInsets.only(top: 30, left: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.arrow_right,
-                          size: 35,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              //Card de Avisos
-              Container(
-                margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                height: 135,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 250, 233),
-                    borderRadius: BorderRadius.circular(7)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Icono de la card
-                    Container(
-                      margin: const EdgeInsets.only(left: 15, top: 10),
-                      child: const Icon(Icons.calendar_today),
-                    ),
-                    //Text de la card
-                    Container(
-                      width: MediaQuery.of(context).size.width * 1 / 2,
-                      margin: const EdgeInsets.only(left: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Recoger contadoras",
-                            style: GoogleFonts.rajdhani(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[200],
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            runSpacing: 20,
-                            children: [
-                              Text(
-                                "mañana recoger las contadoras a las 12:00 en Mecaban",
-                                style: GoogleFonts.rajdhani(
-                                  fontSize: 12,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Arrow de detalles de la card
-                    Container(
-                      margin: const EdgeInsets.only(top: 30, left: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.arrow_right,
-                          size: 35,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
             ],
           ),
-        )
+        ),
+        CardInicioAvisos(),
+        //Card de Avisos
       ]),
     );
   }
 
 //===================================================
 
-}
-
-class Card_Avisos extends StatelessWidget {
-  const Card_Avisos({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      height: 135,
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 250, 233),
-          borderRadius: BorderRadius.circular(7)),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //Icono de la card
-          Container(
-            margin: EdgeInsets.only(left: 15, top: 10),
-            child: const Icon(Icons.calendar_today),
-          ),
-          //Text de la card
-          Container(
-            width: MediaQuery.of(context).size.width * 1 / 2,
-            margin: EdgeInsets.only(left: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Recoger contadoras",
-                  style: GoogleFonts.rajdhani(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red[200],
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 10,
-                  runSpacing: 20,
-                  children: [
-                    Text(
-                      "mañana recoger las contadoras a las 12:00 en Mecaban",
-                      style: GoogleFonts.rajdhani(
-                        fontSize: 12,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          //Arrow de detalles de la card
-          Container(
-            margin: const EdgeInsets.only(top: 30, left: 20),
-            child: InkWell(
-              onTap: () {},
-              child: const Icon(
-                Icons.arrow_right,
-                size: 35,
-                color: Colors.amber,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }

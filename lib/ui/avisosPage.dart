@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 
 import '../provider/salon_provider.dart';
 
-class AveriasPage extends StatefulWidget {
-  const AveriasPage({Key? key}) : super(key: key);
+class AvisosPage extends StatefulWidget {
+  const AvisosPage({Key? key}) : super(key: key);
 
   @override
-  State<AveriasPage> createState() => _AveriasPageState();
+  State<AvisosPage> createState() => _AvisosPageState();
 }
 
-class _AveriasPageState extends State<AveriasPage> {
+class _AvisosPageState extends State<AvisosPage> {
   final style = const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _AveriasPageState extends State<AveriasPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: Text(
-          "Averias",
+          "Avisos",
           style: GoogleFonts.rajdhani(
             textStyle:
                 const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -44,7 +44,7 @@ class _AveriasPageState extends State<AveriasPage> {
             children: [
               Container(
                 alignment: Alignment.topLeft,
-                child: Text("Averias de hoy",
+                child: Text("Avisos pendientes",
                     style: GoogleFonts.rajdhani(textStyle: style)),
                 margin: const EdgeInsets.only(left: 24, top: 10),
               ),

@@ -7,6 +7,7 @@ import 'package:flutter_inicial_gewete/ui/addLocationSalon.dart';
 import 'package:flutter_inicial_gewete/ui/authentication.dart';
 import 'package:flutter_inicial_gewete/ui/gewetepage.dart';
 import 'package:flutter_inicial_gewete/ui/home_page.dart';
+import 'package:flutter_inicial_gewete/ui/avisosPage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_inicial_gewete/net/geolocalitation/geo.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,7 @@ class InitialPage extends StatelessWidget {
           "home": (context) => const HomePage(),
           "gewete": (context) => const GewetePage(),
           "averias": (context) => const AveriasPage(),
+          "avisos": (context) => const AvisosPage(),
           // "confSalon": (context) => const AddLocationSalon(),
         },
         builder: EasyLoading.init(),

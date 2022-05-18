@@ -8,7 +8,7 @@ import '../model/SalonesModel.dart';
 class SalonProvider extends ChangeNotifier {
   List<Salon> salones = [];
   List<NameSalon> listResult = [];
-  List<AveriasObject> averias_salon = [];
+  Map<String, List<AveriasObject>> averias_salon = {};
   bool loading = false;
   int totalAveria = 0;
   addSalon() {}
@@ -33,6 +33,7 @@ class SalonProvider extends ChangeNotifier {
   }
 
   getDetailAverias(String salon, String comunidad) async {
-    averias_salon = await averiasDelSalon(salon, comunidad);
+    List<AveriasObject> result = await averiasDelSalon(salon, comunidad);
+    averias_salon[salon] = result;
   }
 }

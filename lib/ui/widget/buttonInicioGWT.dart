@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../config/Style.dart';
 
-class ButtonDashGrid extends StatefulWidget {
+class ButtonInicioGWT extends StatefulWidget {
   final String title;
   late final double height;
   late final double widt;
   late final int total;
   // final Color color;
-  ButtonDashGrid({
+  ButtonInicioGWT({
     Key? key,
     required this.title,
     double heigh = 5,
@@ -23,10 +23,10 @@ class ButtonDashGrid extends StatefulWidget {
   }
 
   @override
-  State<ButtonDashGrid> createState() => _ButtonDashGridState();
+  State<ButtonInicioGWT> createState() => _ButtonInicioGWTState();
 }
 
-class _ButtonDashGridState extends State<ButtonDashGrid> {
+class _ButtonInicioGWTState extends State<ButtonInicioGWT> {
   // @override
   // void initState() {
   //   super.initState();
@@ -54,43 +54,45 @@ class _ButtonDashGridState extends State<ButtonDashGrid> {
       child: Container(
         height: widget.height,
         width: widget.widt,
-        margin: const EdgeInsets.all(8),
+        // margin: const EdgeInsets.all(8),
         // padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.green[50],
+          color: Colors.red[50],
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // crossAxisAlignment: CrossAxisAlignment.baseline,
           children: [
-            Wrap(
-              spacing: 10,
-              alignment: WrapAlignment.center,
-              children: [
-                Text(
-                  widget.title,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.rajdhani(
-                    fontSize: 14,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            Center(
+              child: Text(
+                widget.title,
+                style: GoogleFonts.rajdhani(
+                    fontSize: 16,
+                    color: Colors.red[300],
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-
-            // Container(
-            //   child: totalaver.salones != 0
-            //       ? Text(totalaver.totalAveria.toString())
-            //       : Container(),
-            // ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 15, left: 0),
+              // child: totalaver.salones.isNotEmpty
+              //     ? Text(
+              //         totalaver.totalAveria.toString(),
+              //         style: GoogleFonts.rajdhani(
+              //             fontSize: 16,
+              //             color: Colors.red[300],
+              //             fontWeight: FontWeight.bold),
+              //       ):
+              child: Text(
+                "0",
+                style: GoogleFonts.rajdhani(
+                    fontSize: 16,
+                    color: Colors.red[300],
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ),
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   // crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [Text(title, style: Stylee.deshStyleTitle), Icon(ico)],
-        // ),
       ),
     );
   }
