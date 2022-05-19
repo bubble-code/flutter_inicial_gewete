@@ -20,7 +20,7 @@ class _Card_AveriasState extends State<Card_Averias> {
   @override
   void initState() {
     super.initState();
-    final averiaSalon = Provider.of<SalonProvider>(context, listen: true);
+    final averiaSalon = Provider.of<SalonProvider>(context, listen: false);
     averiaSalon.getDetailAverias(widget.title, "Madrid");
   }
 

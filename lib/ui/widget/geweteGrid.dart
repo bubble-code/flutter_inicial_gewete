@@ -3,7 +3,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_inicial_gewete/model/DatosDeGewete.dart';
 import 'package:flutter_inicial_gewete/model/GeweteObj.dart';
 import 'package:flutter_inicial_gewete/net/flutterfire.dart';
-
 import '../../net/DBSql/Connection.dart';
 import 'ButtomGeweteGrid.dart';
 
@@ -34,16 +33,8 @@ class _GeweteGridState extends State<GeweteGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverPadding(
-          padding: EdgeInsets.all(3),
-          sliver: SliverToBoxAdapter(
-            child: SizedBox(
-              height: 150,
-            ),
-          ),
-        ),
+    return Column(
+      children: [
         FutureBuilder(
           future: saldosGewetes(),
           builder:
@@ -65,12 +56,10 @@ class _GeweteGridState extends State<GeweteGrid> {
             } else {
               EasyLoading.show(status: "loading..");
             }
-            return SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return children[index];
-                },
-                childCount: children.length,
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: children,
               ),
             );
           },

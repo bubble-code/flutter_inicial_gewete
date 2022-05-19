@@ -49,7 +49,7 @@ class _ButtonInicioGWTState extends State<ButtonInicioGWT> {
     return InkWell(
       onTap: () {
         // totalaver.getTotalAverias(totalaver.listResult);
-        Navigator.pushNamed(context, widget.title.toLowerCase());
+        Navigator.pushNamed(context, "gewete");
       },
       child: Container(
         height: widget.height,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inicial_gewete/model/gewete_series.dart';
+import 'package:flutter_inicial_gewete/ui/widget/chart_data_gwt.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:money2/money2.dart';
 import 'package:decimal/decimal.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class ButtonGeweteGrid extends StatefulWidget {
   final String title;
@@ -20,6 +23,7 @@ class ButtonGeweteGrid extends StatefulWidget {
 }
 
 class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
+  final List<GeweteSeries> datas = [];
   // @override
   // void initState() {
   //   super.initState();
@@ -59,15 +63,21 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
     double total = 0.0;
     widget.valores.forEach((key, value) {
       total += value;
+      datas.add(
+        GeweteSeries(
+          cant: value,
+          type: key,
+        ),
+      );
       result.add(
         Container(
-          padding: const EdgeInsets.only(
-              top: 16.0, bottom: 16.0, right: 3.0, left: 3.0),
+          // padding: const EdgeInsets.only(
+          //     top: 16.0, bottom: 16.0, right: 3.0, left: 3.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
             color: Colors.white54,
           ),
-          child: Column(
+          child: Row(
             children: [
               Text(
                 key.toStringAsFixed(2),
@@ -120,9 +130,12 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
                         color: Colors.blue[50],
                         borderRadius: BorderRadius.circular(7)),
                     child: Text(
-                      Money.fromDecimal(Decimal.parse(total.toString()),
-                              code: 'EUR')
-                          .toString(),
+                      " " +
+                          Money.fromDecimal(Decimal.parse(total.toString()),
+                                  code: 'EUR')
+                              .format(r"###.###,##")
+                              .toString() +
+                          " € ",
                       // " € " + total.toStringAsFixed(2) + " ",
                       style: GoogleFonts.rajdhani(
                         fontSize: 16,
@@ -142,10 +155,17 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
                 color: Colors.amber[700],
               ),
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [...result],
+              // CharDataGWT(data: datas),
+              // ],
             ),
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [...result],
+            // ),
           ],
         ),
       ),
