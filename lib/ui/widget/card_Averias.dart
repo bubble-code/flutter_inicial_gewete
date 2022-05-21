@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 import '../../model/Averias/AveriasModel.dart';
 
 class Card_Averias extends StatefulWidget {
-  final String title;
+  // final String title;
+  final Map<String, List<AveriasObject>> faultsHall;
   const Card_Averias({
     Key? key,
-    required this.title,
+    // required this.title,
+    required this.faultsHall,
   }) : super(key: key);
 
   @override
@@ -17,16 +19,16 @@ class Card_Averias extends StatefulWidget {
 }
 
 class _Card_AveriasState extends State<Card_Averias> {
-  @override
-  void initState() {
-    super.initState();
-    final averiaSalon = Provider.of<SalonProvider>(context, listen: false);
-    averiaSalon.getDetailAverias(widget.title, "Madrid");
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final averiaSalon = Provider.of<SalonProvider>(context, listen: false);
+  //   averiaSalon.getDetailAverias(widget.title, "Madrid");
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final currentAveriasSalon = Provider.of<SalonProvider>(context);
+    // final currentAveriasSalon = Provider.of<SalonProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -56,7 +58,8 @@ class _Card_AveriasState extends State<Card_Averias> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.title,
+                      // widget.title,
+                      widget.faultsHall.keys.first,
                       style: GoogleFonts.rajdhani(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -77,12 +80,13 @@ class _Card_AveriasState extends State<Card_Averias> {
                           radius: 8,
                           child: FittedBox(
                             child: Text(
-                              currentAveriasSalon
-                                      .averias_salon[widget.title]!.isEmpty
-                                  ? "0"
-                                  : currentAveriasSalon
-                                      .averias_salon[widget.title]!.length
-                                      .toString(),
+                              widget.faultsHall.values.first.length.toString(),
+                              // currentAveriasSalon
+                              //         .averias_salon[widget.title]!.isEmpty
+                              //     ? "0"
+                              //     : currentAveriasSalon
+                              //         .averias_salon[widget.title]!.length
+                              //         .toString(),
                               style: GoogleFonts.rajdhani(
                                   fontSize: 16,
                                   color: Colors.black87,
@@ -95,18 +99,19 @@ class _Card_AveriasState extends State<Card_Averias> {
                   ],
                 ),
               ),
-              //Arrow de detalles de la card
-              // Container(
-              //   margin: const EdgeInsets.only(top: 30, left: 20),
-              //   child: InkWell(
-              //     onTap: () {},
-              //     child: const Icon(
-              //       Icons.arrow_right,
-              //       size: 35,
-              //       color: Colors.amber,
-              //     ),
-              //   ),
-              // )
+              // Arrow de detalles de la card
+              Container(
+                height: 5,
+                margin: const EdgeInsets.only(left: 70, top: 0),
+                child: InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.arrow_right,
+                    size: 30,
+                    color: Colors.amber,
+                  ),
+                ),
+              )
             ],
           ),
           Container(
@@ -116,8 +121,7 @@ class _Card_AveriasState extends State<Card_Averias> {
               color: Colors.amber[700],
             ),
           ),
-          ...listaSubjectAverias(
-              currentAveriasSalon.averias_salon[widget.title])
+          ...listaSubjectAverias(widget.faultsHall.values.first),
         ],
       ),
     );

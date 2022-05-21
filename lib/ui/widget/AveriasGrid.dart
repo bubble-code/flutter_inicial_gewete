@@ -21,11 +21,11 @@ class _AveriasGridState extends State<AveriasGrid> {
         List<Widget> children = [];
         if (lis.hasData) {
           for (var item in lis.data!) {
-            children.add(
-              Card_Averias(
-                title: item.nombre,
-              ),
-            );
+            // children.add(
+            //   Card_Averias(
+            //     title: item.nombre,
+            //   ),
+            // );
           }
           EasyLoading.dismiss();
         } else if (lis.hasError) {

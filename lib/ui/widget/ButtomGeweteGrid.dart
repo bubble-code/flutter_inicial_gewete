@@ -61,14 +61,39 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
   Widget build(BuildContext context) {
     List<Widget> result = [];
     double total = 0.0;
+    Color colorr;
     widget.valores.forEach((key, value) {
       total += value;
-      datas.add(
-        GeweteSeries(
-          cant: value,
-          type: key,
-        ),
-      );
+      // datas.add(
+      //   GeweteSeries(
+      //     cant: value,
+      //     type: key,
+      //   ),
+      // );
+      switch (key.toStringAsFixed(2)) {
+        case '10.00':
+          colorr = value < 500.0
+              ? const Color.fromARGB(255, 249, 115, 105)
+              : Colors.black45;
+          break;
+        case '20.00':
+          colorr = value < 5000.0
+              ? const Color.fromARGB(255, 249, 115, 105)
+              : Colors.black45;
+          break;
+        case '50.00':
+          colorr = value < 7000.0
+              ? const Color.fromARGB(255, 249, 115, 105)
+              : Colors.black45;
+          break;
+        case '1.00':
+          colorr = value < 500.0
+              ? const Color.fromARGB(255, 249, 115, 105)
+              : Colors.black45;
+          break;
+        default:
+          colorr = Colors.black45;
+      }
       result.add(
         Container(
           // padding: const EdgeInsets.only(
@@ -79,45 +104,88 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
           ),
           child: Row(
             children: [
-              Text(
-                key.toStringAsFixed(2),
-                style: const TextStyle(fontSize: 16.0, color: Colors.black),
+              Container(
+                width: 30,
+                child: Text(
+                  Money.fromDecimal(Decimal.parse(key.toString()), code: 'EUR')
+                      .format(r'##.##,##'),
+                  style: GoogleFonts.rajdhani(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black26,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 3, right: 6),
+                width: MediaQuery.of(context).size.width * 1 / 3,
+                alignment: Alignment.centerLeft,
+                child: Divider(
+                  color: Colors.amber[700],
+                ),
               ),
               Text(
-                value.toStringAsFixed(2),
-                style: const TextStyle(fontSize: 10.0),
+                Money.fromDecimal(Decimal.parse(value.toString()), code: 'EUR')
+                        .format(r'##.###,##') +
+                    " €",
+                style: GoogleFonts.rajdhani(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: colorr,
+                ),
               ),
             ],
           ),
         ),
       );
     });
-    return InkWell(
-      onTap: () {
-        // List<dynamic> resulty = [];
-        //  ConnetionDB cc = ConnetionDB(widget.ip, widget.passw);
-      },
-      child: Container(
-        margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        // height: 130,
-        decoration: BoxDecoration(
-          // color: widget.color,
-          borderRadius: BorderRadius.circular(7),
-        ),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 2 / 3,
-              margin: const EdgeInsets.only(left: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.title,
+    return
+        // InkWell(
+        //   onTap: () {
+        //     // List<dynamic> resulty = [];
+        //     //  ConnetionDB cc = ConnetionDB(widget.ip, widget.passw);
+        //   },
+        //   child:
+        Container(
+      margin: const EdgeInsets.only(top: 10, left: 14, right: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      // height: 130,
+      decoration: BoxDecoration(
+        // color: widget.color,
+        borderRadius: BorderRadius.circular(7),
+      ),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 2 / 3,
+            margin: const EdgeInsets.only(left: 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.title,
+                  style: GoogleFonts.rajdhani(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[50],
+                      borderRadius: BorderRadius.circular(7)),
+                  child: Text(
+                    " " +
+                        Money.fromDecimal(Decimal.parse(total.toString()),
+                                code: 'EUR')
+                            .format(r"###.###,##")
+                            .toString() +
+                        " € ",
+                    // " € " + total.toStringAsFixed(2) + " ",
                     style: GoogleFonts.rajdhani(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -125,50 +193,31 @@ class _ButtonGeweteGridState extends State<ButtonGeweteGrid> {
                     ),
                     textAlign: TextAlign.start,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        borderRadius: BorderRadius.circular(7)),
-                    child: Text(
-                      " " +
-                          Money.fromDecimal(Decimal.parse(total.toString()),
-                                  code: 'EUR')
-                              .format(r"###.###,##")
-                              .toString() +
-                          " € ",
-                      // " € " + total.toStringAsFixed(2) + " ",
-                      style: GoogleFonts.rajdhani(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * 1,
-              alignment: Alignment.centerLeft,
-              child: Divider(
-                color: Colors.amber[700],
-              ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 1,
+            alignment: Alignment.centerLeft,
+            child: Divider(
+              color: Colors.amber[700],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [...result],
-              // CharDataGWT(data: datas),
-              // ],
-            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [...result],
+            // CharDataGWT(data: datas),
+            // ],
+          ),
 
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [...result],
-            // ),
-          ],
-        ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [...result],
+          // ),
+        ],
       ),
     );
+    // );
   }
 }

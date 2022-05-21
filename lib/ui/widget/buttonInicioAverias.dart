@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inicial_gewete/provider/salon_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../config/Style.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 class ButtonInicioAverias extends StatefulWidget {
   final String title;
@@ -27,19 +28,38 @@ class ButtonInicioAverias extends StatefulWidget {
 }
 
 class _ButtonInicioAveriasState extends State<ButtonInicioAverias> {
+  late StreamSubscription streamCantAverias;
+  final db = FirebaseFirestore.instance;
+  int cant = 0;
   @override
   void initState() {
     super.initState();
+    streamCantAverias = db
+        .collection("salones")
+        .doc("Madrid")
+        .collection("Averias")
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        cant = event.size;
+      });
+    });
     final salones = Provider.of<SalonProvider>(context, listen: false);
     salones.getTotalAverias(salones.listResult);
   }
 
   @override
+  void dispose() {
+    streamCantAverias.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final totalaver = Provider.of<SalonProvider>(context, listen: true);
+    final totalaver = Provider.of<SalonProvider>(context, listen: false);
     return InkWell(
       onTap: () {
-        totalaver.getTotalAverias(totalaver.listResult);
+        // totalaver.getTotalAverias(totalaver.listResult);
         Navigator.pushNamed(context, widget.title.toLowerCase());
       },
       child: Container(
@@ -66,21 +86,13 @@ class _ButtonInicioAveriasState extends State<ButtonInicioAverias> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 15, left: 0),
-              child: totalaver.salones.isNotEmpty
-                  ? Text(
-                      totalaver.totalAveria.toString(),
-                      style: GoogleFonts.rajdhani(
-                          fontSize: 16,
-                          color: Colors.blue[300],
-                          fontWeight: FontWeight.bold),
-                    )
-                  : Text(
-                      "0",
-                      style: GoogleFonts.rajdhani(
-                          fontSize: 16,
-                          color: Colors.blue[300],
-                          fontWeight: FontWeight.bold),
-                    ),
+              child: Text(
+                cant.toString(),
+                style: GoogleFonts.rajdhani(
+                    fontSize: 16,
+                    color: Colors.blue[300],
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
