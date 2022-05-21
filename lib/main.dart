@@ -5,6 +5,7 @@ import 'package:flutter_inicial_gewete/provider/salon_provider.dart';
 import 'package:flutter_inicial_gewete/ui/AveriasPage.dart';
 import 'package:flutter_inicial_gewete/ui/addLocationSalon.dart';
 import 'package:flutter_inicial_gewete/ui/authentication.dart';
+import 'package:flutter_inicial_gewete/ui/detallesAveriasPage.dart';
 import 'package:flutter_inicial_gewete/ui/gewetepage.dart';
 import 'package:flutter_inicial_gewete/ui/home_page.dart';
 import 'package:flutter_inicial_gewete/ui/avisosPage.dart';
@@ -68,6 +69,12 @@ class InitialPage extends StatelessWidget {
           "gewete": (context) => const GewetePage(),
           "averias": (context) => const AveriasPage(),
           "avisos": (context) => const AvisosPage(),
+          "averiasDetail": (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Map;
+            return PageDetailsAverias(
+              salon: args['salon'],
+            );
+          },
           // "confSalon": (context) => const AddLocationSalon(),
         },
         builder: EasyLoading.init(),

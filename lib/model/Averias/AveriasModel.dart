@@ -1,5 +1,5 @@
 class AveriasObject {
-  final String from, id, subject, date, state, detalles, tecnico;
+  final String from, id, subject, date, state, detalles, tecnico, prioridad;
 
   AveriasObject({
     this.id = "",
@@ -9,5 +9,6 @@ class AveriasObject {
     this.detalles = "",
     this.from = "",
     this.tecnico = "",
+    this.prioridad = "",
   });
 }

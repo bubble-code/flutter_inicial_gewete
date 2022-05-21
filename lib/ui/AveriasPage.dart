@@ -82,6 +82,7 @@ class _AveriasPageState extends State<AveriasPage> {
                 detalles: 'e.get("detalles")',
                 subject: e.get("subject"),
                 tecnico: e.get("tecnico"),
+                prioridad: e.get("prioridad"),
               ));
               // listOfWidgetAverias.add(
               //   Card_Averias(

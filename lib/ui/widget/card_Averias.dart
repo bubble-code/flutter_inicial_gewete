@@ -101,14 +101,25 @@ class _Card_AveriasState extends State<Card_Averias> {
               ),
               // Arrow de detalles de la card
               Container(
-                height: 5,
-                margin: const EdgeInsets.only(left: 70, top: 0),
+                height: 15,
+                margin: const EdgeInsets.only(left: 70, top: 3),
+                decoration: BoxDecoration(
+                    color: Colors.green[50],
+                    borderRadius: BorderRadius.circular(7)),
                 child: InkWell(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.arrow_right,
-                    size: 30,
-                    color: Colors.amber,
+                  onTap: () {
+                    Navigator.pushNamed(context, "averiasDetail", arguments: {
+                      "salon": widget.faultsHall.keys.first,
+                    });
+                  },
+                  child: Text(
+                    "  Detalles  ",
+                    style: GoogleFonts.rajdhani(
+                      fontSize: 12,
+                      color: Colors.green[500],
+                      fontWeight: FontWeight.bold,
+                      // decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               )
