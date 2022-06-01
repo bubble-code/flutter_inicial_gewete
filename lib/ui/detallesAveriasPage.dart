@@ -73,7 +73,7 @@ class _PageDetailsAveriasState extends State<PageDetailsAverias> {
                   item.get("from"): [
                     AveriasObject(
                       date: item.get("date"),
-                      detalles: 'item.get("date")',
+                      detalles: item.get("detalle"),
                       from: item.get("from"),
                       id: item.get("id"),
                       prioridad: item.get("prioridad"),

@@ -95,14 +95,16 @@ List<Widget> listaSubjectAverias(List<AveriasObject>? lis) {
     result.add(
       Container(
         margin: const EdgeInsets.only(left: 10, right: 6),
-        child: Text(
-          item.subject.replaceFirst("\n", "").trim(),
-          style: GoogleFonts.rajdhani(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+        child: Expanded(
+          child: Text(
+            item.detalles,
+            style: GoogleFonts.rajdhani(
+              fontSize: 8,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            textAlign: TextAlign.start,
           ),
-          textAlign: TextAlign.start,
         ),
       ),
     );
